@@ -34,11 +34,12 @@ const App = () => {
             <h1>Component 3</h1>
             <h1>Component 4</h1>
             <h1>Component 5</h1>
-            <button id="login-btn" onClick={login}>Login</button>
-            <button id="signout" onClick={logout}>Signout</button>
             <div id="current-user">
-                <h1>Current user: {user.name}, isAuthenticated: {user.isAuthenticated ? 'Yes' : 'No'}</h1>
+                <h4>Current user: {user.name}, isAuthenticated: {user.isAuthenticated ? 'Yes' : 'No'}</h4>
             </div>
+            <button id="login-btn" onClick={login}>Login</button>
+            <button id="signout" onClick={logout}>Signout</button>  
+            <br/>          
             <input
                 id="shopping-input"
                 type="text"
