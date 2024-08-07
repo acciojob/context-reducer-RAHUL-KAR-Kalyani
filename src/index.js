@@ -1,13 +1,12 @@
-// src/index.js
+// index.js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './components/App';
-import { AppProvider } from './components/AppContext';
+import { UserProvider } from './components/UserContext';
 
 ReactDOM.render(
-  <AppProvider>
+  <UserProvider>
     <App />
-  </AppProvider>,
+  </UserProvider>,
   document.getElementById('root')
 );

@@ -1,54 +1,63 @@
-// src/App.js
-import React from 'react';
-import { useAppContext } from './AppContext';
+// App.js
+import React, { useState } from 'react';
+import { useUser } from './UserContext';
 
 const App = () => {
-  const {
-    isAuthenticated,
-    currentUser,
-    items,
-    inputValue,
-    setInputValue,
-    login,
-    signout,
-    addItem,
-    removeItem,
-    clearItems
-  } = useAppContext();
+    const { user, login, logout } = useUser();
+    const [inputValue, setInputValue] = useState('');
+    const [list, setList] = useState([]);
 
-  return (
-    <div>
-      <button id="login-btn" onClick={login}>
-        Login
-      </button>
-      <button id="signout" onClick={signout}>
-        Signout
-      </button>
-      <div id="current-user">
-        Current user: {currentUser || ''}, isAuthenticated: {isAuthenticated ? 'Yes' : 'No'}
-      </div>
-      <input
-        id="shopping-input"
-        type="text"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      />
-      <button onClick={addItem}>Add</button>
-      <button id="clear-list" onClick={clearItems}>
-        Clear
-      </button>
-      <ul>
-        {items.map((item) => (
-          <li key={item}>
-            {item}
-            <button id={`remove-${item}`} onClick={() => removeItem(item)}>
-              Remove
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+    const handleInputChange = (e) => {
+        setInputValue(e.target.value);
+    };
+
+    // const handleAdd = () => {
+    //     if (inputValue.trim()) {
+    //         setList([...list, inputValue]);
+    //         setInputValue('');
+    //     }
+    // };
+
+    // const handleRemove = (item) => {
+    //     setList(list.filter(i => i !== item));
+    // };
+
+    const handleClear = () => {
+        setList([]);
+    };
+
+    return (
+        <div>
+            <h2>use Context Hook</h2>
+            <h1>Hello {user.name}</h1>
+            <h1>Component 2</h1>
+            <h1>Component 3</h1>
+            <h1>Component 4</h1>
+            <h1>Component 5</h1>
+            <button id="login-btn" onClick={login}>Login</button>
+            <button id="signout" onClick={logout}>Signout</button>
+            <div id="current-user">
+                <h1>Current user: {user.name}, isAuthenticated: {user.isAuthenticated ? 'Yes' : 'No'}</h1>
+            </div>
+            <input
+                id="shopping-input"
+                type="text"
+                value={inputValue}
+                onChange={handleInputChange}
+            />
+            {/* <button onClick={handleAdd}>Add</button> */}
+            <br />
+            <button id="clear-list" onClick={handleClear}>Clear List</button>
+            <ul>
+                {list.map(item => (
+                    <li key={item} id={`item-${item}`}>
+                        {item}
+                        {/* <button id={`remove-${item}`} onClick={() => handleRemove(item)}>Remove</button> */}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 };
 
 export default App;
